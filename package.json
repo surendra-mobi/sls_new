@@ -1,0 +1,14 @@
+{
+  "name": "aws-sls-skm",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/rds-signer": "^3.614.0",
+    "express": "^4.19.2",
+    "mysql2": "^3.10.3",
+    "serverless-http": "^3.2.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^13.6.0"
+  }
+}
