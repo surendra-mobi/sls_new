@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 const { Signer } = require("@aws-sdk/rds-signer");
 //const host = 'database-1.crsuewgyo9jw.us-east-1.rds.amazonaws.com';
-const host = 'rds-proxy-private.proxy-crsuewgyo9jw.us-east-1.rds.amazonaws.com';
+require('dotenv').config()
+const host = 'rds-proxy-connect-fcfc301e0481ea42.elb.us-east-1.amazonaws.com';
 const user = 'admin';
 //const user = 'jane_doe';
 //let AWS = require('aws-sdk');
@@ -23,8 +24,8 @@ app.get("/hello", (req, res, next) => {
 });
 app.get("/testconn", async(req, res, next)=>{
   const SESConfig = {
-  accessKeyId: "AKIAQ3EGURWVWBWMXSEK",      // should be:  process.env.AWS_ACCESS_ID
-  secretAccessKey: "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",  
+  accessKeyId: process.env.AWS_ACCESS_KEY,      // should be:  process.env.AWS_ACCESS_ID
+  secretAccessKey: process.env.ASW_SECRET_KEY,  
   region: "us-east-1"
  }
  let signer = new Signer({
@@ -40,7 +41,7 @@ let connectionConfig = {
   user: user,
   database: 'rds_test', // Store your DB schema name as an env var
   ssl: 'Amazon RDS',
-  password: token,
+  password: process.env.DB_PASSWORD,
   insecureAuth: true,
   authPlugins: {
     mysql_clear_password: () => () =>signer.getAuthToken()
